@@ -1,0 +1,11 @@
+# Cute shell shortcuts
+alias ls='ls --sort=extension --color=auto'
+alias ll='ls -lh'
+alias pms='sudo pm-suspend'
+alias psg='ps -A | grep'
+alias se='sudo vim'
+alias e='vim'
+alias grep='grep --color -n'
+alias smi='sudo make install'
+
+# vim:ft=sh
