@@ -1,0 +1,71 @@
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
+}
+
+function pafter {
+    awk "/$1/{st=1} //{if (st==1) print \$0;}"
+}
+
+function ptill {
+    awk "/$1/{st=1} //{if (st==0) print \$0;}"
+}
+
+function pbetween {
+    awk "/$1/,/$2/"
+}
+
+function trim {
+    sed 's/^[ \t]*//;s/[ \t]*$//;'
+}
+
+function transpose {
+    awk '{ for (f = 1; f <= NF; f++) a[NR, f] = $f } NF > nf { nf = NF } \
+    END { for (f = 1; f <= nf; f++) for (r = 1; r <= NR; r++) printf a[r, f] (r==NR ? RS : FS) }'
+}
+
+function histogram {
+    cut -f$1 -d' ' | sort -n | uniq -c | awk '{printf "%s %s\n", $2, $1};'
+}
+
+function ensure_dir {
+    if [ ! -e $1 ]; then mkdir -p $1; fi;
+}
+
+function lr {
+  ls $1 | sort -nr | head -n 1
+}
+
+function countdown(){
+   date1=$((`date +%s` + 60 * $1)); 
+   while [ "$date1" -ne `date +%s` ]; do 
+     echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+     sleep 0.1
+   done
+}
+function stopwatch(){
+  date1=`date +%s`; 
+   while true; do 
+    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; 
+    sleep 0.1
+   done
+}
+
+function isosx() {
+  if [[ $(uname) == "Darwin" ]]; then
+    return 0;
+  else
+    return 1;
+  fi;
+}
+
+function pgsql() {
+  query=$1;
+  psql -h "$DB_HOST" \
+    -p "$DB_PORT" \
+    -U "$DB_USER" \
+    --set ON_ERROR_STOP=on \
+    "$DB_DB" \
+    -c "$query"
+}
+
+# vim:ft=sh

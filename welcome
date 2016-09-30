@@ -1,0 +1,8 @@
+# vim:ft=sh
+
+date
+# Fortunes!
+if which fortune &> /dev/null; then
+    fortune;
+fi
+

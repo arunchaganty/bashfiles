@@ -1,15 +1,41 @@
-# Env variables
-export PATH=$HOME/scripts:$HOME/.local/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+# Env variables
+export PATH=/usr/local/bin:$PATH 
+export PATH=$HOME/.local/bin:$PATH 
+export PATH=$HOME/scripts:$PATH 
 
-# Proxy settings
-export http_proxy='127.0.0.1:5050'
-export https_proxy='127.0.0.1:5050'
-export ftp_proxy='127.0.0.1:5050'
-#export http_proxy=
-#export https_proxy=
-#export ftp_proxy=
+#export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages/
+#export PYTHONPATH=$HOME/.local/lib/python2.7/:$PYTHONPATH
+
+# Autojump
+if [ "$BASH" ] && [ "$BASH" != "/bin/sh" ]; then
+  if `is_osx`; then
+    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+  else
+    source /usr/share/autojump/autojump.bash
+  fi
+elif [ "$ZSH" ]; then
+  source /usr/share/autojump/autojump.zsh
+fi
+
+# JavaNLP
+export IDEA_JDK=$HOME/programs/jdk1.8.0
+
+export PATH=$HOME/programs/scala-2.10.2/bin/:$PATH
+export PATH=$HOME/programs/idea/bin/:$PATH
+
+# Fig
+export PATH=$HOME/Projects/fig/bin:$PATH
+
+# RVM
+export PATH=$HOME/.rvm/bin:$PATH
+export RFIG_DIR=$HOME/Projects/rfig
+export EVEREST='73.202.176.149'
+
+export _JAVA_AWT_WM_NONREPARENTING=1 
+
+# For ruby scripting  
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # vim:ft=sh

@@ -1,11 +1,17 @@
 # Cute shell shortcuts
 alias ls='ls --sort=extension --color=auto'
-alias ll='ls -lh'
+alias ll='ls -lh --color=auto'
 alias pms='sudo pm-suspend'
-alias psg='ps -A | grep'
+alias psg='ps -ax | grep'
 alias se='sudo vim'
 alias e='vim'
-alias grep='grep --color -n'
-alias smi='sudo make install'
+alias g='grep --color -n'
 
+alias go='gnome-open'
+
+if `is_osx`; then
+  alias c='pbcopy';
+else
+  alias c='xclip -selection clipboard';
+fi
 # vim:ft=sh
